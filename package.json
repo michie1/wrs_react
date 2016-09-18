@@ -1,5 +1,11 @@
 {
   "devDependencies": {
+    "eslint": "^3.5.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.2.2",
+    "react-hot-loader": "^3.0.0-beta.4",
     "webpack": "^1.13.2"
   },
   "dependencies": {
@@ -8,5 +14,9 @@
     "babel-preset-react": "^6.11.1",
     "react": "^15.3.1",
     "react-dom": "^15.3.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --progress --inline --hot",
+    "lint": "./node_modules/eslint/bin/eslint.js Components/* || true"
   }
 }
