@@ -5,44 +5,29 @@ import {AppContainer} from './Components/App.jsx';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {List, Map} from 'immutable';
-
-/*
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
-*/
-
-let reducer = (state, action) => {
-  if (action.type === 'toEnglish') {
-    return state.set(action.index, 'bye');
-  } else if (action.type === 'rename') {
-    if (action.name === undefined) {
-      return state.set('name', 'foobar');
-    } else {
-      return state.set('name', action.name);
-    }
-  } else {
-    return state;
-  }
-}
+import {reducer} from './reducer';
 
 let initialState = Map({
   hoi: 'doei',
-  name: 'Mich'
+  name: 'Mich',
+  rider: {
+    name: 'Michiel',
+    licence: 'Elite',
+  },
+  results: [{
+    race: {
+      name: 'Ronde van de Lier',
+    },
+    result: '12',
+  }, {
+    race: {
+      name: 'Ronde van de Race',
+    },
+    result: '21',
+  }]
 });
 
 let store = createStore(reducer, initialState);
-
-console.log(store.getState().get('hoi'));
-store.dispatch({
-  type: 'toEnglish',
-  index: 'hoi'
-});
-
-console.log(store.getState().get('hoi'));
-
-
 
 ReactDOM.render(
   <Provider store={store}>
