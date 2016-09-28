@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
-import App from './Components/App.jsx';
+import {AppContainer} from './Components/App.jsx';
 import {Provider} from 'react-redux';
-import { createStore } from 'redux';
-import { List, Map } from 'immutable';
+import {createStore} from 'redux';
+import {List, Map} from 'immutable';
 
 /*
 ReactDOM.render(
@@ -13,18 +13,26 @@ ReactDOM.render(
 );
 */
 
-let wrsApp = (state, action) => {
+let reducer = (state, action) => {
   if (action.type === 'toEnglish') {
     return state.set(action.index, 'bye');
+  } else if (action.type === 'rename') {
+    if (action.name === undefined) {
+      return state.set('name', 'foobar');
+    } else {
+      return state.set('name', action.name);
+    }
+  } else {
+    return state;
   }
-  return state;
 }
 
 let initialState = Map({
-  hoi: 'doei'
+  hoi: 'doei',
+  name: 'Mich'
 });
 
-let store = createStore(wrsApp, initialState);
+let store = createStore(reducer, initialState);
 
 console.log(store.getState().get('hoi'));
 store.dispatch({
@@ -34,9 +42,11 @@ store.dispatch({
 
 console.log(store.getState().get('hoi'));
 
+
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <AppContainer />
   </Provider>,
   document.getElementById('app')
 )
