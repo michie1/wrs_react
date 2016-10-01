@@ -1,21 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {rename} from '../../../actionCreators';
+import {setName} from '../../../actionCreators';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export class Change extends React.Component {
   //mixins: [PureRenderMixin]
 
-  rename = (e) => {
-    return this.props.rename(e.target.value);
+  setName = (e) => {
+    return this.props.setName(e.target.value);
   }
 
   render() {
     const {name} = this.props;
     return (
       <div>
-        Naam: <input type="text" ref="name" value={name} onChange={this.rename} />
+        Naam: <input type="text" ref="name" value={name} onChange={this.setName} />
       </div>
     );
   }
@@ -29,7 +29,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    rename
+    setName
   }, dispatch);
 }
 

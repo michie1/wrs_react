@@ -1,13 +1,13 @@
-export function rename(name) {
+export function setName(name) {
   return {
-    type: 'rename',
+    type: 'SET_NAME',
     name: name
   };
 }
 
 export function setState(state) {
   return {
-    type: 'setState',
+    type: 'SET_STATE',
     state: state
   };
 }

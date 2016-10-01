@@ -12,14 +12,12 @@ export class Rider extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {results.map(({race, result}, key) => {
-            return (
+          {results.map(({race, result}, key) => 
               <tr key={key}>
                 <td>{race.name}</td>
                 <td>{result}</td>
               </tr>
-            )
-          })}
+          )}
         </tbody>
       </table>
     );

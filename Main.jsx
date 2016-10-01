@@ -6,31 +6,35 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import {List, Map, fromJS} from 'immutable';
 import {reducer} from './reducer';
+import io from 'socket.io-client';
 
 let initialState = Map();
 
 let beginState = {
   rider: {
-    name: 'Michiel',
-    licence: 'Elite',
+    name: '',
+    licence: '',
   },
-  results: [{
-    race: {
-      name: 'Ronde van de Lier',
-    },
-    result: '12',
-  }, {
-    race: {
-      name: 'Ronde van de Race',
-    },
-    result: '21',
-  }]
+  results: []
 };
 
 let store = createStore(reducer, initialState);
+const socket = io('http://localhost:8090');
+
+socket.on('state', state => {
+ console.log('state', state); 
+ store.dispatch({
+   type: 'SET_STATE',
+   state: state
+ });
+});
+
+socket.on('action', state => {
+ console.log('action', state); 
+});
 
 store.dispatch({
-  type: 'setState',
+  type: 'SET_STATE',
   state: beginState
 });
 
