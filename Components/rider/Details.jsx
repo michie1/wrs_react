@@ -1,15 +1,17 @@
 import React from 'react';
 import {Info} from './details/Info.jsx';
-import {Change} from './details/Change.jsx';
+import {ChangeContainer as Change} from './details/Change.jsx';
 import {Rider as Results} from '../result/Rider.jsx';
+import {fromJS} from 'immutable';
 
 export class Details extends React.Component {
   render() {
+    const {rider, results} = this.props;
     return (
       <div>
-        <Info name={this.props.rider.name} licence={this.props.rider.licence} />
-        <Change name={this.props.rider.name} />
-        <Results results={this.props.results}/>
+        <Info rider={rider} />
+        <Results results={results}/>
+        <Change />
       </div>
     );
   }

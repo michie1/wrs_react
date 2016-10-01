@@ -5,19 +5,13 @@ import {Details as RiderDetails} from './rider/Details.jsx';
 import {rename} from '../actionCreators';
 
 export class App extends React.Component {
-  rename = () => {
-    console.log('rename');
-    return this.props.rename('hoi');
-  }
-
   render() {
+    const {rider, results} = this.props;
+    const {name} = rider.toJS();
     return (
       <div>
-        <h1>Hello! {this.props.name}</h1>
-        <RiderDetails rider={this.props.rider} results={this.props.results} />
-        <button onClick={this.rename}>
-          Rename
-        </button>
+        <h1>Hallo! {name}</h1>
+        <RiderDetails rider={rider} results={results} />
       </div>
     );
   }
@@ -25,14 +19,15 @@ export class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    name: state.get('name'),
     rider: state.get('rider'),
     results: state.get('results')
   };
 };
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({rename}, dispatch);
+  return bindActionCreators({
+    //rename
+  }, dispatch);
 }
 
 export const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App);

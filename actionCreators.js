@@ -4,3 +4,10 @@ export function rename(name) {
     name: name
   };
 }
+
+export function setState(state) {
+  return {
+    type: 'setState',
+    state: state
+  };
+}

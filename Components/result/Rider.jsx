@@ -2,6 +2,7 @@ import React from 'react';
 
 export class Rider extends React.Component {
   render() {
+    const results = this.props.results.toJS();
     return (
       <table>
         <thead>
@@ -11,11 +12,11 @@ export class Rider extends React.Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.results.map((result, i) => {
+          {results.map(({race, result}, key) => {
             return (
-              <tr key={i}>
-                <td>{result.race.name}</td>
-                <td>{result.result}</td>
+              <tr key={key}>
+                <td>{race.name}</td>
+                <td>{result}</td>
               </tr>
             )
           })}

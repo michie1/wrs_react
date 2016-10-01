@@ -1,8 +1,8 @@
 function rename(state, name) {
     if (name === undefined) {
-      return state.set('name', 'foobar');
+      return state.setIn(['rider', 'name'], 'undefined');
     } else {
-      return state.set('name', name);
+      return state.setIn(['rider', 'name'], name);
     }
 }
 
@@ -11,7 +11,14 @@ export function reducer(state, action) {
     return state.set(action.index, 'bye');
   } else if (action.type === 'rename') {
     return rename(state, action.name);
+  } else if (action.type === 'setState') {
+    return setState(state, action.state);
   } else {
     return state;
   }
 }
+
+export function setState(state, newState) {
+  return state.merge(newState);
+}
+

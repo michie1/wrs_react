@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route, hashHistory} from 'react-router';
-import {AppContainer} from './Components/App.jsx';
+import {AppContainer as App} from './Components/App.jsx';
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
-import {List, Map} from 'immutable';
+import {List, Map, fromJS} from 'immutable';
 import {reducer} from './reducer';
 
-let initialState = Map({
-  hoi: 'doei',
-  name: 'Mich',
+let initialState = Map();
+
+let beginState = {
   rider: {
     name: 'Michiel',
     licence: 'Elite',
@@ -25,13 +25,18 @@ let initialState = Map({
     },
     result: '21',
   }]
-});
+};
 
 let store = createStore(reducer, initialState);
 
+store.dispatch({
+  type: 'setState',
+  state: beginState
+});
+
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer />
+    <App />
   </Provider>,
   document.getElementById('app')
 )
