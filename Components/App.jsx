@@ -2,9 +2,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {Details as RiderDetails} from './rider/Details.jsx';
-import {rename} from '../actionCreators';
+import {fetchRider} from '../actionCreators';
 
 export class App extends React.Component {
+  componentDidMount() {
+    const {socket, fetchRider} = this.props;
+    console.log('App did mount');
+    //console.log(this.props.getRiderState());
+    fetchRider();
+
+    socket.on('rider', response => {
+      console.log('on rider', response);
+    });
+
+    console.log('emit rider');
+    socket.emit('rider');
+  }
+
   render() {
     const {rider, results} = this.props;
     const {name} = rider.toJS();
@@ -26,7 +40,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    //rename
+    fetchRider
   }, dispatch);
 }
 

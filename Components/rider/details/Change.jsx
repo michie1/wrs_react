@@ -1,11 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {setName} from '../../../actionCreators';
+import {setName, getRiderState} from '../../../actionCreators';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export class Change extends React.Component {
   //mixins: [PureRenderMixin]
+
+  componentDidMount() {
+    console.log('component did mount');
+    //console.log(this.props.getRiderState());
+  }
 
   setName = (e) => {
     return this.props.setName(e.target.value);
@@ -29,7 +34,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    setName
+    setName,
+    getRiderState
   }, dispatch);
 }
 
