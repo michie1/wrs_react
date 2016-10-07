@@ -31,3 +31,17 @@ export function fetchRider() {
   }
 }
 
+export function onRider(socket) {
+  return function (dispatch) {
+    socket.on('rider', response => {
+      console.log('on rider', response);
+    });
+  }
+}
+
+export function emitRider(socket) {
+  return function (dispatch) {
+    console.log('emit rider');
+    return socket.emit('rider');
+  }
+}
